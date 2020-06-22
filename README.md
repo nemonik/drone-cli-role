@@ -1,4 +1,4 @@
-# Drone-cli Ansible role
+# Drone CLI Ansible role
 
 ![Basic role syntax check](https://github.com/nemonik/drone-cli-role/workflows/Basic%20role%20syntax%20check/badge.svg)
 
