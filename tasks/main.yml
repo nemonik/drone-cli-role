@@ -27,7 +27,7 @@
   block:
   - name: create /vagrant/cache/boxes if it doesn't exist
     shell: |
-      if [[ "windows" == "{{ host_os }}" && "{{ cache_path }}" -ne "/tmp" ]]; then
+      if [[ "windows" == "{{ host_os }}" && "{{ cache_path }}" != "/tmp" ]]; then
         sudo su
       fi
       mkdir -p {{ cache_path }}
