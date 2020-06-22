@@ -1,0 +1,5 @@
+---
+# defaults file for drone-cli
+default_retries: 60
+default_delay: 10
+drone_cli_version: v1.2.1
