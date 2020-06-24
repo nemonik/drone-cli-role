@@ -15,7 +15,7 @@
   tags:
     - drone-cli
 
-- name: set cache_path to /temp if not set
+- name: set cache_path to /tmp if not set
   set_fact:
     cache_path: /tmp
   when:
