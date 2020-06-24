@@ -16,6 +16,7 @@ A CentOS 7, Alpine 3.10 and Ubuntu Bionic base image.
 | default_delay            | yes      | 60                    | Integer value       | default delay in seconds between retries                                |
 | drone_cli_version        | yes      | v1.1.0                | String version      | the release to install from https://github.com/drone/drone-cli/releases | 
 | cache_path               | no       | /tmp                  | String path         | used to cache drone cli tar ball                                        |
+
 ## Example Playbook
 
 An example can be found used in my Hands-on DevOps course's [box/ansible/box-playbook-1.yml](https://github.com/nemonik/hands-on-DevOps/blob/master/box/ansible/box-playbook-1.yml).
