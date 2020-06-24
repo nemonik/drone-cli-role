@@ -37,10 +37,13 @@
     args:
       executable: /bin/bash 
    
-  - name: is drone archive cached
+  - name: is drone archive cached?
     stat:
       path: "{{cache_path}}/drone_linux_amd64.tar.gz"
     register: archive_cached
+
+  - debug:
+     msg: "{{ archive_cached }}"
 
   # Ignore `[WARNING]: Consider using get_url or uri module rather than running
   # wget` when running as the URL is a redirect, so Ansible chokes using its
