@@ -3,6 +3,16 @@ galaxy_info:
   description: Ansible role to configure Drone CLI
   license: 3-Clause BSD License
   min_ansible_version: 2.4
+  platforms:
+  - name: CentOS
+    versions:
+    - 7
+  - name: Alpine
+    versions:
+    - 3.10
+  - name: Ubuntu
+    versions:
+    - 18.04
   galaxy_tags:
   - drone-cli
 
