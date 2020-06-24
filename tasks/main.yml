@@ -42,12 +42,6 @@
       path: "{{cache_path}}/drone_linux_amd64.tar.gz"
     register: archive_cached
 
-  - debug:
-     msg: "{{ archive_cached }}"
-
-  - debug:
-     msg: "{{ not archive_cached.stat.exists }}"
-
   # Ignore `[WARNING]: Consider using get_url or uri module rather than running
   # wget` when running as the URL is a redirect, so Ansible chokes using its
   # default modules to retrieve.
@@ -71,6 +65,7 @@
     unarchive:
       src: "{{ cache_path }}/drone_linux_amd64.tar.gz"
       dest: /usr/local/bin
+      remote_src: yes
 
   - name: ensure "export PATH=/usr/local/bin:$PATH" is absent from /etc/profile
     become: yes
@@ -85,6 +80,7 @@
       dest: /etc/profile
       line: export PATH=/usr/local/bin:$PATH
       insertafter: EOF
-  when: drone_cli_installed.stat.exists == False
+  when: 
+    - not drone_cli_installed.stat.exists
   tags:
     - drone-cli
