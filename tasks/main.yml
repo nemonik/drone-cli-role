@@ -45,7 +45,7 @@
   # Ignore `[WARNING]: Consider using get_url or uri module rather than running
   # wget` when running as the URL is a redirect, so Ansible chokes using its
   # default modules to retrieve.
-  - name: cache https://github.com/drone/drone-cli/releases/download/{{ drone_cli_version }}/drone_linux_amd64.tar.gz to {{cache_path}}s
+  - name: cache https://github.com/drone/drone-cli/releases/download/{{ drone_cli_version }}/drone_linux_amd64.tar.gz to {{cache_path}}
     shell: |
       if [[ "windows" == "{{ host_os | default('') }}"  && "{{ cache_path }}" != "/tmp" ]]; then
          sudo su
@@ -58,7 +58,7 @@
     delay: "{{ default_delay }}"
     register: result
     until: result is succeeded
-    when: archive_cached.stat.exists == False
+    when: not archive_cached.stat.exists
 
   - name: install drone cli binary release
     become: yes
