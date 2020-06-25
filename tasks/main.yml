@@ -25,12 +25,12 @@
 
 - name: install drone cli
   block:
-  - name: create {{ cache_path }} if it doesn't exist
+  - name: create {{ cache_path }}/files if it doesn't exist
     shell: |
       if [[ "windows" == "{{ host_os | default('') }}" && "{{ cache_path }}" != "/tmp" ]]; then
         sudo su
       fi
-      mkdir -p {{ cache_path }}
+      mkdir -p {{ cache_path }}/files
     when:
       - cache_path is defined
       - cache_path != '/tmp'
@@ -39,7 +39,7 @@
    
   - name: is drone archive cached?
     stat:
-      path: "{{cache_path}}/drone_linux_amd64.tar.gz"
+      path: "{{cache_path}}/files/drone_linux_amd64.tar.gz"
     register: archive_cached
 
   # Ignore `[WARNING]: Consider using get_url or uri module rather than running
@@ -51,7 +51,7 @@
          sudo su
       fi
       rm -f {{ cache_path }}/drone_linux_amd64.tar.gz
-      wget -q https://github.com/drone/drone-cli/releases/download/{{ drone_cli_version }}/drone_linux_amd64.tar.gz --directory-prefix {{cache_path}}
+      wget -q https://github.com/drone/drone-cli/releases/download/{{ drone_cli_version }}/drone_linux_amd64.tar.gz --directory-prefix {{cache_path}}/files
     args:
       executable: /bin/bash
     retries: "{{ default_retries }}"
@@ -63,7 +63,7 @@
   - name: install drone cli binary release
     become: yes
     unarchive:
-      src: "{{ cache_path }}/drone_linux_amd64.tar.gz"
+      src: "{{ cache_path }}/files/drone_linux_amd64.tar.gz"
       dest: /usr/local/bin
       remote_src: yes
 
